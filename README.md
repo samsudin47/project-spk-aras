@@ -1,1 +1,1 @@
-Panduan Penggunaan System Penunjang Keputusan Pemilihan ABD
+Sistem Pendukung Keputusan
