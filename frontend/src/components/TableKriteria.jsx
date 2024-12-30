@@ -115,16 +115,15 @@ export default function TableKriteria() {
   return (
     <>
       <div className="container mt-5">
-        <div className="text-start">
+        <div className="text-end me-5">
           {/*  */}
           <Button className="btn btn-primary mb-4" onClick={handleShow}>
             <ion-icon name="add-outline" size="small"></ion-icon>
-            Add New Kriteria
+            Add Kriteria
           </Button>
-
           <Modal show={show} onHide={handleClose}>
             <ModalHeader>
-              <ModalTitle>Add New Kriteria</ModalTitle>
+              <ModalTitle>Add Kriteria</ModalTitle>
             </ModalHeader>
             <Modal.Body>
               <form>
@@ -181,8 +180,8 @@ export default function TableKriteria() {
                     onChange={(e) => setType(e.target.value)}
                   >
                     <option value="">Pilih Atribut</option>
-                    <option value="cost">Cost</option>
-                    <option value="benefit">Benefit</option>
+                    <option value="Cost">Cost</option>
+                    <option value="Benefit">Benefit</option>
                   </select>
                 </div>
               </form>
@@ -192,7 +191,7 @@ export default function TableKriteria() {
                 Close
               </Button>
               <Button variant="primary" onClick={handleSave}>
-                {id ? "Update" : "Save Changes"}
+                {id ? "Update" : "Save"}
               </Button>
             </Modal.Footer>
           </Modal>

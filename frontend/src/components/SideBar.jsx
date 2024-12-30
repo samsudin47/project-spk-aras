@@ -11,17 +11,13 @@ import { useNavigate } from "react-router-dom";
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
-
     navigate("/login");
   };
-
   return (
     <>
       {/* Added icon button to toggle sidebar visibility */}
@@ -40,45 +36,45 @@ export default function SideBar() {
             <h4 className="text-dark text-center mb-4 fw-bold">Master Data</h4>
             <ul>
               <li className="mb-4">
-                <Link className="sidebar" to="/">
-                  <FaHome className="me-3 text-white" />
+                <Link className="sidebar text-dark" to="/">
+                  <FaHome className="me-3 text-dark" />
                   Dashboard
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar" to={"/kriteria"}>
-                  <AiFillDatabase className="me-3 text-white" />
+                <Link className="sidebar text-dark" to={"/kriteria"}>
+                  <AiFillDatabase className="me-3 text-dark" />
                   Data Kriteria
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar" to={"/alternatif"}>
-                  <AiFillDatabase className="me-3 text-white" />
-                  Data Alternatif
+                <Link className="sidebar text-dark" to={"/penilaianAlternatif"}>
+                  <AiFillDatabase className="me-3 text-dark" />
+                  Data Sub Kriteria
                 </Link>
               </li>
 
               <li className="mb-4">
-                <Link className="sidebar" to={"/penilaianAlternatif"}>
-                  <AiFillDatabase className="me-3 text-white" />
-                  Data Sub Kriteria & Penilaian
+                <Link className="sidebar text-dark" to={"/alternatif"}>
+                  <AiFillDatabase className="me-3 text-dark" />
+                  Data Alternatif
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar" to={"/proseshitung"}>
-                  <SiProcesswire className="me-3 text-white" />
-                  Proses Hitung
+                <Link className="sidebar text-dark" to={"/proseshitung"}>
+                  <SiProcesswire className="me-3 text-dark" />
+                  Data Perhitungan
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar" to={"/hasilkeputusan"}>
-                  <AiFillPrinter className="me-3 text-white" />
-                  Data Hasil Keputusan
+                <Link className="sidebar text-dark" to={"/hasilkeputusan"}>
+                  <AiFillPrinter className="me-3 text-dark" />
+                  Data Hasil Akhir
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar">
-                  <LuUsers className="me-3 text-white" />
+                <Link className="sidebar text-dark">
+                  <LuUsers className="me-3 text-dark" />
                   Data User
                 </Link>
               </li>

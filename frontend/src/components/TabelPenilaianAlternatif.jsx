@@ -201,12 +201,10 @@ export default function TabelPenilaianAlternatif() {
       <div className="container mt-5">
         <div className="text-start">
           <div>
-            <div>
+            <div className="text-end me-5">
               <Button className="btn btn-primary mb-4" onClick={handleOpen}>
-                Add Nilai Alternatif
-              </Button>
-              <Button className="btn btn-danger ms-3 mb-4">
-                Kosongkan Tabel
+                <ion-icon name="add-outline" size="small"></ion-icon>
+                Tambah Data
               </Button>
             </div>
             <div className="d-flex justify-content-center">
@@ -222,7 +220,7 @@ export default function TabelPenilaianAlternatif() {
                     variant="h6"
                     className="text-center pt-3"
                   >
-                    Add Nilai Alternatif
+                    Tambah Data
                   </Box>
                   <Typography
                     id="modal-modal-description"
@@ -316,7 +314,7 @@ export default function TabelPenilaianAlternatif() {
                               : handleAdd();
                           }}
                         >
-                          {formValues.id ? "Update" : "Save Changes"}
+                          {formValues.id ? "Update" : "Save"}
                         </Button>
                       </div>
                     </form>
@@ -331,7 +329,6 @@ export default function TabelPenilaianAlternatif() {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Periode</th>
                 <th scope="col">Alternatif</th>
                 <th scope="col">Kriteria</th>
                 <th scope="col">Nilai</th>
@@ -344,7 +341,7 @@ export default function TabelPenilaianAlternatif() {
                   <td scope="row">
                     {(currentPage - 1) * itemsPerPage + index + 1}
                   </td>
-                  <td>{item.periode}</td>
+
                   <td>
                     {item.alternative
                       ? item.alternative.name
@@ -395,9 +392,6 @@ export default function TabelPenilaianAlternatif() {
                   currentPage={currentPage}
                   onPageChange={paginate}
                 />
-              </div>
-              <div className="col-md text-end">
-                <button className="btn btn-primary">Perhitungan SAW</button>
               </div>
             </div>
           </div>

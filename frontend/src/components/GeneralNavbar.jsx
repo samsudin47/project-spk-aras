@@ -1,5 +1,4 @@
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import { useState, useEffect } from "react";
 
 export default function GeneralNavbar() {
@@ -37,14 +36,6 @@ export default function GeneralNavbar() {
               </li>
             </ul>
             <Form className="d-flex" role="search">
-              <InputGroup>
-                <input
-                  className="form-control"
-                  type="search"
-                  placeholder="Search..."
-                  aria-label="Search"
-                />
-              </InputGroup>
               <div className="icon-wrapper ms-5">
                 <ion-icon
                   className="icon-class"

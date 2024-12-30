@@ -1,5 +1,5 @@
 import Normalisasi from "./Normalisasi";
-import HasilNormalisasi from "./HasilNormalisasi";
+// import HasilNormalisasi from "./HasilNormalisasi";
 import HitungNilaiPreferensi from "./HitungNilaiPreferensi";
 // import HasilPreferensi from "./HasilPreferensi";
 // import HitungTotalNilaiPreferensi from "./HitungTotalNilaiPreferensi";
@@ -64,9 +64,7 @@ export default function TableProsesHitung() {
   return (
     <>
       <div className="container mt-5">
-        <h4 className="text-start mb-4">
-          1. Data masing-masing produk terhadap kriteria
-        </h4>
+        <h4 className="text-start mb-4">1. Matriks Keputusan</h4>
         <div className="me-5">
           <table className="table table-striped">
             <thead>
@@ -101,7 +99,7 @@ export default function TableProsesHitung() {
                   </tr>
                 );
               })}
-              <tr>
+              {/* <tr>
                 <th scope="row" colSpan={2}>
                   Nilai Maksimal
                 </th>
@@ -114,8 +112,8 @@ export default function TableProsesHitung() {
                   );
                   return <td key={crit.id}>{maxNilai}</td>;
                 })}
-              </tr>
-              <tr>
+              </tr> */}
+              {/* <tr>
                 <th scope="row" colSpan={2}>
                   Nilai Minimal
                 </th>
@@ -130,7 +128,7 @@ export default function TableProsesHitung() {
 
                   return <td key={crit.id}>{minNilai}</td>;
                 })}
-              </tr>
+              </tr> */}
             </tbody>
           </table>
           <Normalisasi
@@ -138,11 +136,11 @@ export default function TableProsesHitung() {
             alternatives={alternatives}
             criteria={criteria}
           />
-          <HasilNormalisasi
+          {/* <HasilNormalisasi
             penilaianAlternatif={penilaianAlternatif}
             alternatives={alternatives}
             criteria={criteria}
-          />
+          /> */}
           <HitungNilaiPreferensi
             penilaianAlternatif={penilaianAlternatif}
             alternatives={alternatives}

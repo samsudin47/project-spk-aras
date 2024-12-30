@@ -4,67 +4,71 @@ export default function HitungNilaiPreferensi({
   alternatives,
   criteria,
 }) {
-  // Fungsi untuk menghitung nilai maksimal untuk setiap kriteria
-  const getMaxValueForCriterion = (kriteriaId) => {
-    const values = penilaianAlternatif
-      .filter((item) => item.kriteriaId === kriteriaId)
-      .map((item) => item.nilai);
-    return Math.max(...values);
-  };
+  // Hitung nilai normalisasi untuk setiap alternatif dan kriteria
+  const normalizedValues = criteria.map((crit) => {
+    const total = penilaianAlternatif
+      .filter((item) => item.kriteriaId === crit.id)
+      .reduce((sum, item) => sum + item.nilai, 0);
 
-  const getMinValueForCriterion = (kriteriaId) => {
-    const values = penilaianAlternatif
-      .filter((item) => item.kriteriaId === kriteriaId)
-      .map((item) => item.nilai);
-    return Math.min(...values);
-  };
+    return {
+      kriteriaId: crit.id,
+      total,
+    };
+  });
 
-  // Hitung nilai preferensi
+  // Hitung nilai utility terbobot dan total utility untuk setiap alternatif
   const calculatedPreferences = alternatives.map((alternative) => {
-    let totalPreference = 0; // Akumulasi nilai preferensi
-    const normalizedValues = criteria.map((crit) => {
+    let totalUtility = 0;
+    const utilityValues = criteria.map((crit) => {
       const nilai = penilaianAlternatif.find(
         (item) =>
           item.alternativeId === alternative.id && item.kriteriaId === crit.id
       )?.nilai;
 
-      let normalizedValue = 0;
+      const total = normalizedValues.find(
+        (norm) => norm.kriteriaId === crit.id
+      )?.total;
 
-      if (crit.kriteriaId === "Harga") {
-        // Menggunakan nilai minimum untuk kriteria "Harga"
-        const minNilai = getMinValueForCriterion(crit.id);
-        normalizedValue = nilai ? minNilai / nilai : 0;
-      } else {
-        // Menggunakan nilai maksimum untuk kriteria lainnya
-        const maxNilai = getMaxValueForCriterion(crit.id);
-        normalizedValue = nilai ? nilai / maxNilai : 0;
-      }
+      // Normalisasi nilai (rij)
+      const normalizedValue = nilai ? nilai / total : 0;
 
-      // Hitung nilai berbobot
+      // Hitung nilai utility terbobot (zij)
       const weightedValue = normalizedValue * (crit.bobot / 10);
 
-      // Tambahkan ke total nilai preferensi
-      totalPreference += weightedValue;
+      // Akumulasi total utility (Si)
+      totalUtility += weightedValue;
 
       return {
         kriteriaId: crit.id,
-        normalizedValue: normalizedValue,
-        weightedValue: weightedValue,
+        normalizedValue,
+        weightedValue,
       };
     });
 
     return {
       alternative: alternative.name,
-      normalizedValues,
-      preferensi: totalPreference,
+      utilityValues,
+      totalUtility,
+    };
+  });
+
+  // Cari S_max untuk menghitung rasio (Ki)
+  const maxUtility = Math.max(
+    ...calculatedPreferences.map((item) => item.totalUtility)
+  );
+
+  // Hitung rasio (Ki) untuk setiap alternatif
+  const finalPreferences = calculatedPreferences.map((item) => {
+    const ratio = item.totalUtility / maxUtility;
+    return {
+      ...item,
+      ratio,
     };
   });
 
   return (
     <div className="my-5">
-      <h4 className="text-start mb-4">
-        4. Menghitung Nilai Preferensi & Hasil Preferensi
-      </h4>
+      <h4 className="text-start mb-4">3. Hitung Nilai Utility Terbobot</h4>
       <div className="me-5">
         <table className="table table-striped">
           <thead>
@@ -76,18 +80,24 @@ export default function HitungNilaiPreferensi({
                   {crit.kriteriaId}
                 </th>
               ))}
-              <th scope="col">Nilai Preferensi</th>
+              <th scope="col">
+                Total Utility (S<sub>i</sub>)
+              </th>
+              <th scope="col">
+                Rasio (K<sub>i</sub>)
+              </th>
             </tr>
           </thead>
           <tbody>
-            {calculatedPreferences.map((item, index) => (
+            {finalPreferences.map((item, index) => (
               <tr key={index}>
                 <td scope="row">{index + 1}</td>
                 <td>{item.alternative}</td>
-                {item.normalizedValues.map((val, idx) => (
-                  <td key={idx}>{val.normalizedValue.toFixed(2)}</td>
+                {item.utilityValues.map((val, idx) => (
+                  <td key={idx}>{val.weightedValue.toFixed(3)}</td>
                 ))}
-                <td>{item.preferensi.toFixed(2)}</td>
+                <td>{item.totalUtility.toFixed(3)}</td>
+                <td>{item.ratio.toFixed(3)}</td>
               </tr>
             ))}
             <tr>
@@ -95,9 +105,9 @@ export default function HitungNilaiPreferensi({
                 Bobot Kriteria
               </th>
               {criteria.map((crit) => (
-                <td key={crit.id}>{(crit.bobot / 10).toFixed(1)}</td>
+                <td key={crit.id}>{(crit.bobot / 10).toFixed(2)}</td>
               ))}
-              <td>-</td>
+              <td colSpan={2}></td>
             </tr>
           </tbody>
         </table>
