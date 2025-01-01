@@ -92,7 +92,12 @@ export default function HitungNilaiPreferensi({
             {finalPreferences.map((item, index) => (
               <tr key={index}>
                 <td scope="row">{index + 1}</td>
-                <td>{item.alternative}</td>
+                <td>
+                  {
+                    alternatives.find((alt) => alt.name === item.alternative)
+                      ?.kode
+                  }
+                </td>
                 {item.utilityValues.map((val, idx) => (
                   <td key={idx}>{val.weightedValue.toFixed(3)}</td>
                 ))}

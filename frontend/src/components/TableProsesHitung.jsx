@@ -88,7 +88,7 @@ export default function TableProsesHitung() {
                 return (
                   <tr key={alternative.id}>
                     <td scope="row">{index + 1}</td>
-                    <td>{alternative.name}</td>
+                    <td>{alternative.kode}</td>
                     {criteria.map((crit) => {
                       // Temukan nilai untuk kriteria tertentu
                       const nilai = penilaian.find(
@@ -99,36 +99,6 @@ export default function TableProsesHitung() {
                   </tr>
                 );
               })}
-              {/* <tr>
-                <th scope="row" colSpan={2}>
-                  Nilai Maksimal
-                </th>
-                {criteria.map((crit) => {
-                  const maxNilai = Math.max(
-                    ...penilaianAlternatif
-                      .filter((item) => item.kriteriaId === crit.id)
-                      .map((item) => item.nilai),
-                    0
-                  );
-                  return <td key={crit.id}>{maxNilai}</td>;
-                })}
-              </tr> */}
-              {/* <tr>
-                <th scope="row" colSpan={2}>
-                  Nilai Minimal
-                </th>
-                {criteria.map((crit) => {
-                  const filteredData = penilaianAlternatif.filter(
-                    (item) => item.kriteriaId === crit.id
-                  );
-                  const minNilai =
-                    filteredData.length > 0
-                      ? Math.min(...filteredData.map((item) => item.nilai)) // Cari nilai minimal
-                      : "N/A"; // Jika tidak ada data, tampilkan "N/A" atau kosong
-
-                  return <td key={crit.id}>{minNilai}</td>;
-                })}
-              </tr> */}
             </tbody>
           </table>
           <Normalisasi
@@ -136,11 +106,6 @@ export default function TableProsesHitung() {
             alternatives={alternatives}
             criteria={criteria}
           />
-          {/* <HasilNormalisasi
-            penilaianAlternatif={penilaianAlternatif}
-            alternatives={alternatives}
-            criteria={criteria}
-          /> */}
           <HitungNilaiPreferensi
             penilaianAlternatif={penilaianAlternatif}
             alternatives={alternatives}

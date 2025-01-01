@@ -91,7 +91,12 @@ export default function Perangkingan({
             {rankedValues.map((item, index) => (
               <tr key={index}>
                 <td scope="row">{index + 1}</td>
-                <td>{item.alternative}</td>
+                <td>
+                  {
+                    alternatives.find((alt) => alt.name === item.alternative)
+                      ?.kode
+                  }
+                </td>
                 <td>{item.totalUtility.toFixed(3)}</td>
                 <td>{item.ratio.toFixed(3)}</td>
                 <td>{index + 1}</td>

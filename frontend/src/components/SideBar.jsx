@@ -73,7 +73,7 @@ export default function SideBar() {
                 </Link>
               </li>
               <li className="mb-4">
-                <Link className="sidebar text-dark">
+                <Link to={"/datausers"} className="sidebar text-dark">
                   <LuUsers className="me-3 text-dark" />
                   Data User
                 </Link>
